@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Sep 30, 2025 at 01:18 PM
+-- Generation Time: Oct 01, 2025 at 11:46 AM
 -- Server version: 8.0.43
 -- PHP Version: 8.2.29
 
@@ -100,13 +100,13 @@ ALTER TABLE `Book`
 ALTER TABLE `Loan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Loan_ibfk_1` (`book_id`),
-  ADD KEY `Loan_ibfk_2` (`member_id`);
+  ADD KEY `member_id` (`member_id`);
 
 --
 -- Indexes for table `Member`
 --
 ALTER TABLE `Member`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `id` (`id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -144,14 +144,14 @@ ALTER TABLE `Member`
 -- Constraints for table `Book`
 --
 ALTER TABLE `Book`
-  ADD CONSTRAINT `Book_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `Author` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Book_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `Author` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `Loan`
 --
 ALTER TABLE `Loan`
-  ADD CONSTRAINT `Loan_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `Book` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `Loan_ibfk_2` FOREIGN KEY (`member_id`) REFERENCES `Member` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Loan_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `Book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Loan_ibfk_2` FOREIGN KEY (`member_id`) REFERENCES `Member` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
